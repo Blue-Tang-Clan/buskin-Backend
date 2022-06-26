@@ -9,4 +9,14 @@ router.get('/auth', (req, res) => {
     .catch((err) => res.status(500).send('Internal Server Error', err));
 });
 
+router.post('/auth', (req, res) => {
+  const {
+    username, email, password, type,
+  } = req.body;
+
+  auth.add(username, email, password, type)
+    .then(() => res.sendStatus(201))
+    .catch((err) => res.status(500).send('Internal Server Error', err));
+});
+
 module.exports = router;
