@@ -10,11 +10,6 @@ const client = new Client({
 
 client.connect()
   .then(() => console.log('connected to database!'))
-  .then(() => {
-    client.query('SELECT * FROM auth;')
-      .then((data) => console.log('should return matching rows', data.rows))
-      .catch((err) => console.error('query error', err.stack));
-  })
   .catch((err) => console.error('connection error', err.stack));
 
-module.export = client;
+module.exports = client;
