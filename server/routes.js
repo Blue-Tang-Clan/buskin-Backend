@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../database/controllers/auth');
 const artist = require('../database/controllers/artists');
-// const fans = require('../database/controllers/fans');
+const fans = require('../database/controllers/fans');
 
 // Routes for Artists
 router.get('/artist/profile/:artist_id', artist.getArtistProfile);
