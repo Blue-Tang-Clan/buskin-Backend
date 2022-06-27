@@ -4,4 +4,4 @@ const fan = {
 
 };
 
-module.exports =  fan;
+module.exports = fan
