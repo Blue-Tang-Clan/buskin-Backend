@@ -1,6 +1,5 @@
 const { query } = require('express');
-const model = require('../models');
-const client = require('../index');
+const artist = require('../models/artist');
 
 module.exports = {
 
@@ -17,17 +16,10 @@ module.exports = {
   putArtistProfile: (req, res) => {
 
   },
+ 
 
-  deleteArtistEvent: (req, res) => {
-    // DELETE FROM table
-    // WHERE condition;
-    const fanId = req.body.fans_id;
-    const artistId = req.body.artist_id;
-    
-  },
-  putArtistEvent: (req, res) => {
-
-  },
+  deleteArtistEvent: (req, res) => { artist.deleteArtistEvent(req, res) },
+  putArtistEvent: (req, res) => { artist.putArtistEvent(req, res) }
 };
 
 // const deleteArtistProfile

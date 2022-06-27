@@ -6,6 +6,8 @@ const artist = require('../database/controllers/artists');
 // Routes for Artists
 router.get('/artist/profile/:artist_id', artist.getArtistProfile);
 router.post('/artists/event/:artist_id', artist.postArtistEvent);
+router.put('/artists/event/:artist_id', artist.putArtistEvent);
+router.delete('/artists/event/:artist_id', artist.deleteArtistEvent);
 
 // Routes for Fans
 // Save Event
