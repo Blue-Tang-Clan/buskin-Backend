@@ -7,11 +7,12 @@ module.exports = {
     // Insert into artist_events join table artist id and event id
   },
 
-  getArtistProfile: (req, res) => {
+  getArtistDetails: (req, res) => {
+    console.log('req', req);
     model.get(req, res);
   },
 
-  putArtistProfile: (req, res) => {
+  updateArtistProfile: (req, res) => {
     model.update(req, res);
   },
 
