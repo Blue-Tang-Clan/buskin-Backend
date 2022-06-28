@@ -17,6 +17,6 @@ module.exports = {
     models.fans.removeEvent(req, res);
   },
   unfollowArtist: function(req, res) {
-    models.fans.removeEvent(req, res);
+    models.fans.unfollowArtist(req, res);
   }
 }
