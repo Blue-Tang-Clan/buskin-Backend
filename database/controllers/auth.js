@@ -11,28 +11,30 @@ module.exports = {
   registerUser: (req, res) => {
     const {
       username,
-      email,
       password,
-      type,
+      email,
+      userType,
     } = req.body;
     const saltRounds = 10;
     // hash password
     bcrypt.hash(password, saltRounds)
-      .then((hash) => (addUser(username, email, hash, type)
+      .then((hash) => (addUser(username, email, hash, userType)
       ))
       .then((data) => {
         const { id } = data.rows[0];
-        if (type === 'artist') {
+        if (userType === 'artist') {
           // add new artist
           return addOneArtist(id);
         }
         // add new fan
         return addOneFan(id);
       })
-      .then(() => {
-        res.status(201).send('success');
+      .then((data) => {
+        const userId = data.rows[0].id;
+        res.status(201).send({ userId, username, userType });
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).send(err);
       });
   },
@@ -52,7 +54,7 @@ module.exports = {
               if (!pass) {
                 res.status(400).send('Wrong Username or Password');
               } else {
-                res.status(201).send({ id: user.id, username: user.username });
+                res.status(201).send({ id: user.id, username: user.username, userType: user.type });
               }
             });
         }
