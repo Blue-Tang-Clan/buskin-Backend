@@ -16,7 +16,6 @@ module.exports = {
   putArtistProfile: (req, res) => {
 
   },
- 
 
   deleteArtistEvent: (req, res) => { artist.deleteArtistEvent(req, res) },
   putArtistEvent: (req, res) => { artist.putArtistEvent(req, res) }
