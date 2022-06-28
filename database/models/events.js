@@ -3,7 +3,7 @@ const client = require('../index');
 module.exports = {
   getAll: (req, res) => {
     client.query(`
-      SELECT *, a.display_name
+      SELECT e.*, a.display_name
       FROM event e, artists a
       WHERE e.art_id = a.id
       LIMIT 50
@@ -20,7 +20,7 @@ module.exports = {
   },
   get: (req, res) => {
     client.query(`
-      SELECT *, a.display_name
+      SELECT e.*, a.display_name
       FROM event e, artists a
       WHERE e.id = '${req.params.eventId}'
       AND e.art_id = a.id
