@@ -26,8 +26,8 @@ module.exports = {
                 'event_longitude', e.longitude,
                 'event_latitude', e.latitude,
                 'event_timestamp', e.timestamp,
-                'event_start', e.start,
-                'event_end', e.end
+                'event_start_time', e.start_time,
+                'event_end_time', e.end_time
               )
             )
           )
@@ -41,13 +41,15 @@ module.exports = {
             array_agg(
               json_build_object(
                 'artist_id', a.id,
-                'artist_display-name', a.display-name,
+                'artist_display_name', a.display_name,
                 'artist_instrument', a.instrument,
                 'artist_genre', a.genre,
                 'artist_bio', a.bio,
-                'artist_picture', a.picture,
-                'artist_paymentmethod', a.paymentmethod,
-                'artist_fans_count', a.fans_count
+                'artist_pic', a.pic,
+                'artist_venmo', a.venmo,
+                'artist_paypal', a.paypal,
+                'artist_cashapp', a.cashapp,
+                'artist_fan_num', a.fan_num
               )
             )
           )
