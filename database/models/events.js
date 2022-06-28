@@ -5,6 +5,7 @@ module.exports = {
     client.query(`
       SELECT *
       FROM events
+      LIMIT 100
     `)
     .then((data) => {
       res.statusCode = 200;
