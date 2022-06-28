@@ -62,15 +62,15 @@ module.exports = {
       FROM fans f
       WHERE f.id = '${req.params.fanId}'
     `)
-    .then((data) => {
-      res.statusCode = 200;
-      res.end(JSON.stringify(data.rows[0].json_build_object));
-    })
-    .catch((err) => {
-      res.status(500);
-      console.log('GET Fan Info error: ', err);
-      res.end(JSON.stringify(err));
-    });
+      .then((data) => {
+        res.statusCode = 200;
+        res.end(JSON.stringify(data.rows[0].json_build_object));
+      })
+      .catch((err) => {
+        res.status(500);
+        console.log('GET Fan Info error: ', err);
+        res.end(JSON.stringify(err));
+      });
   },
 
   saveEvent: (req, res) => {
@@ -78,12 +78,12 @@ module.exports = {
                   (fan_id, event_id)
                   VALUES
                   (${req.body.id}, ${req.body.event_id})`)
-    .then(() => res.sendStatus(201))
-    .catch(err => {
-      console.log('Save Event Fan error: ', err);
-      res.status(500);
-      res.end(JSON.stringify(err));
-    });
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('Save Event Fan error: ', err);
+        res.status(500);
+        res.end(JSON.stringify(err));
+      });
   },
 
   followArtist: (req, res) => {
@@ -91,12 +91,12 @@ module.exports = {
                   (fan_id, art_id)
                   VALUES
                   (${req.body.id}, ${req.body.artist_id})`)
-    .then(() => res.sendStatus(201))
-    .catch(err => {
-      console.log('Follow Artist Fan error: ', err);
-      res.status(500);
-      res.end(JSON.stringify(err));
-    });
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('Follow Artist Fan error: ', err);
+        res.status(500);
+        res.end(JSON.stringify(err));
+      });
   },
 
   put: (req, res) => {
@@ -105,35 +105,35 @@ module.exports = {
                       city = ${req.body.city},
                       state = ${req.body.state}
                   WHERE id = ${req.params.fanId}`)
-    .then(() => res.sendStatus(204))
-    .catch(err => {
-      console.log('Update profile Fan error: ', err);
-      res.status(500);
-      res.end(JSON.stringify(err));
-    });
+      .then(() => res.sendStatus(204))
+      .catch((err) => {
+        console.log('Update profile Fan error: ', err);
+        res.status(500);
+        res.end(JSON.stringify(err));
+      });
   },
 
   removeEvent: (req, res) => {
     client.query(`DELETE FROM event_fan
                   WHERE fan_id = ${req.params.fanId}
                   AND event_id = ${req.params.eventId} `)
-    .then(() => res.sendStatus(201))
-    .catch(err => {
-      console.log('Remove event Fan error: ', err);
-      res.status(500);
-      res.end(JSON.stringify(err));
-    });
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('Remove event Fan error: ', err);
+        res.status(500);
+        res.end(JSON.stringify(err));
+      });
   },
 
   unfollowArtist: (req, res) => {
     client.query(`DELETE FROM art_fan
                   WHERE fan_id = ${req.params.fanId}
                   AND art_id = ${req.params.artistId} `)
-    .then(() => res.sendStatus(201))
-    .catch(err => {
-      console.log('Unfollow artist Fan error: ', err);
-      res.status(500);
-      res.end(JSON.stringify(err));
-    });
-  }
-}
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('Unfollow artist Fan error: ', err);
+        res.status(500);
+        res.end(JSON.stringify(err));
+      });
+  },
+};
