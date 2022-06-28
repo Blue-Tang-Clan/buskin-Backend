@@ -3,12 +3,10 @@ const model = require('../models/artist');
 module.exports = {
 
   postArtistEvent: (req, res) => {
-    // Insert into events table event info
-    // Insert into artist_events join table artist id and event id
+    model.addEvent(req, res);
   },
 
   getArtistDetails: (req, res) => {
-    console.log('req', req);
     model.get(req, res);
   },
 

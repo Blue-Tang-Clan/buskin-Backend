@@ -26,7 +26,7 @@ router.get('/artist/details/:artist_id', artist.getArtistDetails);
 
 router.put('/artist/profile/:artist_id', artist.updateArtistProfile);
 
-router.post('/artists/event/:artist_id', artist.postArtistEvent);
+router.post('/artist/event/:artist_id', artist.postArtistEvent);
 
 // Routes for Fans
 // Save Event

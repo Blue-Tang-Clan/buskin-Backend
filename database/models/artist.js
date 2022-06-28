@@ -27,6 +27,23 @@ const artist = {
       });
   },
 
+  addEvent: (req, res) => {
+    client.query(`
+    INSERT INTO event (
+      name, street, city, state, longitude, latitude, date, start_time, end_time, art_id
+    )
+    VALUES (
+      '${req.body.name}', '${req.body.street}', '${req.body.city}', '${req.body.state}', ${req.body.longitude},
+      ${req.body.latitude}, '${req.body.date}', '${req.body.start_time}', '${req.body.end_time}', ${req.params.artist_id}
+    );
+    `)
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('Insert error', err);
+        res.sendStatus(400);
+      });
+  },
+
   update: (req, res) => (
     client.query(`
       UPDATE artists
@@ -44,4 +61,3 @@ const artist = {
 };
 
 module.exports = artist;
-
