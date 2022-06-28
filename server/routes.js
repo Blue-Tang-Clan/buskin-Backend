@@ -29,12 +29,6 @@ router.put('/fan/profile/:fanId', fans.put);
 // Get fans dash board information
 router.get('/fan/dashboard/:fanId', fans.get);
 
-<<<<<<< HEAD
-// All events
-router.get('/events/:date', events.getAll);
-// Singular
-router.get('/event/:eventId', events.getEvent);
-=======
 // register and login user
 router.get('/events/:date', events.getAll);
 router.get('/event/:eventId', events.get);
@@ -42,6 +36,5 @@ router.get('/event/:eventId', events.get);
 // register and login user
 router.post('/register', auth.registerUser);
 router.post('/login', auth.loginUser);
->>>>>>> ae9655659edfb89ce61fbd74e3fb089f70480e5a
 
 module.exports = router;
