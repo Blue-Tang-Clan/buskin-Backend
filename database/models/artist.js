@@ -67,6 +67,7 @@ const artist = {
     .then((result) => res.sendStatus(201))
     .catch((err) => res.status(500).json(err));
   },
+  
   putArtistEvent: (req, res) => {
     client.query(`UPDATE events
                   SET name = '${req.body.name}',
