@@ -3,30 +3,16 @@ const auth = require('../database/controllers/auth');
 const artist = require('../database/controllers/artists');
 // const fans = require('../database/controllers/fans');
 
-router.get('/auth', (req, res) => {
-  const { username, password } = req.query;
-
-  auth.find(username, password)
-    .then((data) => res.status(200).send(data))
-    .catch((err) => res.status(500).send('Internal Server Error', err));
-});
-
-router.post('/auth', (req, res) => {
-  const {
-    username, email, password, type,
-  } = req.body;
-
-  auth.add(username, email, password, type)
-    .then(() => res.sendStatus(201))
-    .catch((err) => res.status(500).send('Internal Server Error', err));
-});
-
 // Routes for Artists
 router.get('/artist/details/:artist_id', artist.getArtistDetails);
 
 router.put('/artist/profile/:artist_id', artist.updateArtistProfile);
 
 router.post('/artist/event/:artist_id', artist.postArtistEvent);
+
+router.put('/artists/event/:artist_id', artist.putArtistEvent);
+
+router.delete('/artists/event/:artist_id', artist.deleteArtistEvent);
 
 // Routes for Fans
 // Save Event
@@ -43,5 +29,9 @@ router.post('/artist/event/:artist_id', artist.postArtistEvent);
 // router.put('/fan/profile/:fan_id', fans.put);
 // Get fans dash board information
 // router.get('/fan/dashboard/:fan_id', fans.getDashBoard);
+
+// register and login user
+router.post('/register', auth.registerUser);
+router.post('/login', auth.loginUser);
 
 module.exports = router;
