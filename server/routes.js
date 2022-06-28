@@ -5,9 +5,14 @@ const fans = require('../database/controllers/fans');
 const events = require('../database/controllers/events');
 
 // Routes for Artists
-router.get('/artist/profile/:artist_id', artist.getArtistProfile);
-router.post('/artists/event/:artist_id', artist.postArtistEvent);
+router.get('/artist/details/:artist_id', artist.getArtistDetails);
+
+router.put('/artist/profile/:artist_id', artist.updateArtistProfile);
+
+router.post('/artist/event/:artist_id', artist.postArtistEvent);
+
 router.put('/artists/event/:artist_id', artist.putArtistEvent);
+
 router.delete('/artists/event/:artist_id', artist.deleteArtistEvent);
 
 // Routes for Fans
