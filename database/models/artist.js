@@ -46,7 +46,7 @@ const artist = {
 
   update: (req, res) => (
     const { picture } = req.body;
-
+    console.log(picture);
     client.query(`
       UPDATE artists
       SET displayName = '${req.body.displayName}',
