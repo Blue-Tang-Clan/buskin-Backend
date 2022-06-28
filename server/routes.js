@@ -2,6 +2,7 @@ const router = require('express').Router();
 const auth = require('../database/controllers/auth');
 const artist = require('../database/controllers/artists');
 const fans = require('../database/controllers/fans');
+const events = require('../database/controllers/events');
 
 router.get('/auth', (req, res) => {
   const { username, password } = req.query;
@@ -29,18 +30,21 @@ router.delete('/artists/event/:artist_id', artist.deleteArtistEvent);
 
 // Routes for Fans
 // Save Event
-router.post('/fans/event/:fan_id', fans.saveEvent);
+router.post('/fans/event', fans.saveEvent);
 // Remove Event
-// router.put('/fans/event/:fan_id', fans.removeEvent);
+router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
 // Follow Artist
-router.post('/fans/follow/:fan_id', fans.followArtist);
+router.post('/fans/follow', fans.followArtist);
 // Unfollow Artist
-// router.('/fans/follow/:fan_id', fans.followArtist);
-// Get Profile
-router.get('/fan/profile/:fan_id', fans.getProfile);
+router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
 // Modify Profile
-router.put('/fan/profile/:fan_id', fans.put);
+router.put('/fan/profile/:fanId', fans.put);
 // Get fans dash board information
-router.get('/fan/dashboard/:fan_id', fans.getDashBoard);
+router.get('/fan/dashboard/:fanId', fans.get);
+
+// All events
+router.get('/events/:date', events.getAll);
+// Singular
+router.get('/event/:eventId', events.getEvent);
 
 module.exports = router;
