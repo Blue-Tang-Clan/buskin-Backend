@@ -1,10 +1,10 @@
-var models = require('../models');
+const models = require('../models');
 
 module.exports = {
-  getAll: function(req, res) {
-    models.events.getAll(req, res)
+  getAll: (req, res) => {
+    models.events.getAll(req, res);
   },
-  get: function(req, res) {
+  get: (req, res) => {
     models.events.get(req, res);
-  }
-}
+  },
+};

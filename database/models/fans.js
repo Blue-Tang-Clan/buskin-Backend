@@ -25,13 +25,13 @@ module.exports = {
                 'event_state', e.state,
                 'event_longitude', e.longitude,
                 'event_latitude', e.latitude,
-                'event_timestamp', e.timestamp,
+                'event_date', e.date,
                 'event_start_time', e.start_time,
                 'event_end_time', e.end_time
               )
             )
           )
-          FROM event_fan ef, events e
+          FROM event_fan ef, event e
           WHERE ef.event_id = e.id
           AND ef.fan_id = '${req.params.fanId}'
           GROUP BY ef.fan_id
@@ -53,7 +53,7 @@ module.exports = {
               )
             )
           )
-          FROM art_fan af, artist a
+          FROM art_fan af, artists a
           WHERE af.art_id = a.id
           AND af.fan_id = '${req.params.fanId}'
           GROUP BY af.fan_id
@@ -64,7 +64,7 @@ module.exports = {
     `)
       .then((data) => {
         res.statusCode = 200;
-        res.end(JSON.stringify(data));
+        res.end(JSON.stringify(data.rows[0].json_build_object));
       })
       .catch((err) => {
         res.status(500);
