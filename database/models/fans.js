@@ -4,7 +4,7 @@ module.exports = {
   get: function(req, res) {
     client.query(`
       SELECT json_build_object(
-       'username', (SELECT username FROM authentication a WHERE a.id = f.authentication_id),
+       'username', (SELECT username FROM auth a WHERE a.id = f.auth_id),
        'address', (SELECT
           json_build_object(
             'city', f.city,
