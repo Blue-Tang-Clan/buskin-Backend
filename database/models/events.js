@@ -4,7 +4,7 @@ module.exports = {
   getAll: function(req, res) {
     client.query(`
       SELECT *
-      FROM events e
+      FROM event e
       LIMIT 50
     `)
     .then((data) => {
@@ -20,7 +20,7 @@ module.exports = {
   get: function(req, res) {
     client.query(`
       SELECT *
-      FROM events e
+      FROM event e
       WHERE e.id = '${req.params.eventId}'
     `)
     .then((data) => {
