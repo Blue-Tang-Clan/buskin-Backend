@@ -32,9 +32,9 @@ module.exports = {
             )
           )
           FROM event_fan ef, events e
-          WHERE ef.events_id = e.id
-          AND ef.fans_id = '${req.params.fanId}'
-          GROUP BY ef.fans_id
+          WHERE ef.event_id = e.id
+          AND ef.fan_id = '${req.params.fanId}'
+          GROUP BY ef.fan_id
         ),
         'artists', (SELECT
           array_to_json(
@@ -53,10 +53,10 @@ module.exports = {
               )
             )
           )
-          FROM artist_fan af, artist a
-          WHERE af.artists_id = a.id
-          AND af.fans_id = '${req.params.fanId}'
-          GROUP BY af.fans_id
+          FROM art_fan af, artist a
+          WHERE af.art_id = a.id
+          AND af.fan_id = '${req.params.fanId}'
+          GROUP BY af.fan_id
         )
       )
       FROM fans f
@@ -74,7 +74,7 @@ module.exports = {
   },
   saveEvent: function(req, res) {
     client.query(`INSERT INTO event_fan
-                  (fans_id, events_id)
+                  (fan_id, event_id)
                   VALUES
                   (${req.body.id}, ${req.body.event_id})`)
     .then(() => res.sendStatus(201);)
@@ -85,8 +85,8 @@ module.exports = {
     });
   },
   followArtist: function(req, res) {
-    client.query(`INSERT INTO artist_fan
-                  (fans_id, artists_id)
+    client.query(`INSERT INTO art_fan
+                  (fan_id, art_id)
                   VALUES
                   (${req.body.id}, ${req.body.artist_id})`)
     .then(() => res.sendStatus(201);)
@@ -111,8 +111,8 @@ module.exports = {
   },
   removeEvent: function(req, res) {
     client.query(`DELETE FROM event_fan
-                  WHERE fans_id = ${req.params.fanId}
-                  AND events_id = ${req.params.eventId} `)
+                  WHERE fan_id = ${req.params.fanId}
+                  AND event_id = ${req.params.eventId} `)
     .then(() => res.sendStatus(201);)
     .catch(err => {
       console.log('Remove event Fan error: ', err);
@@ -121,9 +121,9 @@ module.exports = {
     });
   },
   unfollowArtist: function(req, res) {
-    client.query(`DELETE FROM artist_fan
-                  WHERE fans_id = ${req.params.fanId}
-                  AND artists_id = ${req.params.artistId} `)
+    client.query(`DELETE FROM art_fan
+                  WHERE fan_id = ${req.params.fanId}
+                  AND art_id = ${req.params.artistId} `)
     .then(() => res.sendStatus(201);)
     .catch(err => {
       console.log('Unfollow artist Fan error: ', err);
