@@ -18,7 +18,7 @@ router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
 // Follow Artist
 router.post('/fans/follow', fans.followArtist);
 // Unfollow Artist
-router.('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
+router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
 // Modify Profile
 router.put('/fan/profile/:fanId', fans.put);
 // Get fans dash board information
