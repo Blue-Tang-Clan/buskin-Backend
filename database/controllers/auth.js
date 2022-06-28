@@ -1,10 +1,10 @@
+const bcrypt = require('bcrypt');
 const {
   findUser,
   addUser,
   addOneArtist,
   addOneFan,
-} = require('./../models/auth');
-const bcrypt = require('bcrypt');
+} = require('../models/auth');
 require('dotenv').config();
 
 module.exports = {
