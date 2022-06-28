@@ -2,6 +2,7 @@ const client = require('../index');
 
 module.exports = {
   getAll: function(req, res) {
+
     client.query(`
       SELECT *
       FROM events
