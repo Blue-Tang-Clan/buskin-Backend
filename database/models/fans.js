@@ -62,7 +62,7 @@ module.exports = {
     `)
     .then((data) => {
       res.statusCode = 200;
-      res.end(JSON.stringify(data));
+      res.end(JSON.stringify(data.rows[0].json_build_object));
     })
     .catch((err) => {
       res.status(500);
