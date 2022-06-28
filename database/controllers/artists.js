@@ -4,23 +4,20 @@ const artist = require('../models/artist');
 module.exports = {
 
   postArtistEvent: (req, res) => {
-    // Insert into events table event info
-    // Insert into artist_events join table artist id and event id
-
+    artist.addEvent(req, res);
   },
 
-  getArtistProfile: (req, res) => {
-
+  getArtistDetails: (req, res) => {
+    artist.get(req, res);
   },
 
-  putArtistProfile: (req, res) => {
-
+  updateArtistProfile: (req, res) => {
+    artist.update(req, res);
   },
- 
-
+  
   deleteArtistEvent: (req, res) => { artist.deleteArtistEvent(req, res) },
+  
   putArtistEvent: (req, res) => { artist.putArtistEvent(req, res) }
 };
 
 // const deleteArtistProfile
-

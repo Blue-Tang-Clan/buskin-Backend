@@ -4,7 +4,7 @@ module.exports = {
   get: function(req, res) {
     client.query(`
       SELECT json_build_object(
-       'username', (SELECT username FROM authentication a WHERE a.id = f.authentication_id),
+       'username', (SELECT username FROM auth a WHERE a.id = f.auth_id),
        'address', (SELECT
           json_build_object(
             'city', f.city,
@@ -26,35 +26,37 @@ module.exports = {
                 'event_longitude', e.longitude,
                 'event_latitude', e.latitude,
                 'event_timestamp', e.timestamp,
-                'event_start', e.start,
-                'event_end', e.end
+                'event_start_time', e.start_time,
+                'event_end_time', e.end_time
               )
             )
           )
           FROM event_fan ef, events e
-          WHERE ef.events_id = e.id
-          AND ef.fans_id = '${req.params.fanId}'
-          GROUP BY ef.fans_id
+          WHERE ef.event_id = e.id
+          AND ef.fan_id = '${req.params.fanId}'
+          GROUP BY ef.fan_id
         ),
         'artists', (SELECT
           array_to_json(
             array_agg(
               json_build_object(
                 'artist_id', a.id,
-                'artist_display-name', a.display-name,
+                'artist_display_name', a.display_name,
                 'artist_instrument', a.instrument,
                 'artist_genre', a.genre,
                 'artist_bio', a.bio,
-                'artist_picture', a.picture,
-                'artist_paymentmethod', a.paymentmethod,
-                'artist_fans_count', a.fans_count
+                'artist_pic', a.pic,
+                'artist_venmo', a.venmo,
+                'artist_paypal', a.paypal,
+                'artist_cashapp', a.cashapp,
+                'artist_fan_num', a.fan_num
               )
             )
           )
-          FROM artist_fan af, artist a
-          WHERE af.artists_id = a.id
-          AND af.fans_id = '${req.params.fanId}'
-          GROUP BY af.fans_id
+          FROM art_fan af, artist a
+          WHERE af.art_id = a.id
+          AND af.fan_id = '${req.params.fanId}'
+          GROUP BY af.fan_id
         )
       )
       FROM fans f
@@ -72,7 +74,7 @@ module.exports = {
   },
   saveEvent: function(req, res) {
     client.query(`INSERT INTO event_fan
-                  (fans_id, events_id)
+                  (fan_id, event_id)
                   VALUES
                   (${req.body.id}, ${req.body.event_id})`)
     .then(() => res.sendStatus(201);)
@@ -83,8 +85,8 @@ module.exports = {
     });
   },
   followArtist: function(req, res) {
-    client.query(`INSERT INTO artist_fan
-                  (fans_id, artists_id)
+    client.query(`INSERT INTO art_fan
+                  (fan_id, art_id)
                   VALUES
                   (${req.body.id}, ${req.body.artist_id})`)
     .then(() => res.sendStatus(201);)
@@ -109,8 +111,8 @@ module.exports = {
   },
   removeEvent: function(req, res) {
     client.query(`DELETE FROM event_fan
-                  WHERE fans_id = ${req.params.fanId}
-                  AND events_id = ${req.params.eventId} `)
+                  WHERE fan_id = ${req.params.fanId}
+                  AND event_id = ${req.params.eventId} `)
     .then(() => res.sendStatus(201);)
     .catch(err => {
       console.log('Remove event Fan error: ', err);
@@ -119,9 +121,9 @@ module.exports = {
     });
   },
   unfollowArtist: function(req, res) {
-    client.query(`DELETE FROM artist_fan
-                  WHERE fans_id = ${req.params.fanId}
-                  AND artists_id = ${req.params.artistId} `)
+    client.query(`DELETE FROM art_fan
+                  WHERE fan_id = ${req.params.fanId}
+                  AND art_id = ${req.params.artistId} `)
     .then(() => res.sendStatus(201);)
     .catch(err => {
       console.log('Unfollow artist Fan error: ', err);
