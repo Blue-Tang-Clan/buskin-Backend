@@ -16,18 +16,17 @@ router.put('/artists/event/:artist_id', artist.putArtistEvent);
 router.delete('/artists/event/:artist_id', artist.deleteArtistEvent);
 
 // Routes for Fans
-// Save Event
-router.post('/fans/event', fans.saveEvent);
-// Remove Event
-router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
-// Follow Artist
-router.post('/fans/follow', fans.followArtist);
-// Unfollow Artist
-router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
-// Modify Profile
-router.put('/fan/profile/:fanId', fans.put);
-// Get fans dash board information
 router.get('/fan/dashboard/:fanId', fans.get);
+
+router.post('/fans/event', fans.saveEvent);
+
+router.post('/fans/follow', fans.followArtist);
+
+router.put('/fan/profile/:fanId', fans.put);
+
+router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
+
+router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
 
 // register and login user
 router.get('/events/:date', events.getAll);
