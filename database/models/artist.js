@@ -45,6 +45,8 @@ const artist = {
   },
 
   update: (req, res) => (
+    const { picture } = req.body;
+
     client.query(`
       UPDATE artists
       SET displayName = '${req.body.displayName}',
@@ -58,7 +60,7 @@ const artist = {
       .then(() => res.sendStatus(201))
       .catch((err) => res.status(500).send(err))
   ),
-  
+
   deleteArtistEvent: (req, res) => {
     const fanId = req.body.fanId;
     const artistId = req.params.artistId;
@@ -67,7 +69,7 @@ const artist = {
     .then((result) => res.sendStatus(201))
     .catch((err) => res.status(500).json(err));
   },
-  
+
   putArtistEvent: (req, res) => {
     client.query(`UPDATE events
                   SET name = '${req.body.name}',
