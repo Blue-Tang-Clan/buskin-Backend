@@ -18,14 +18,14 @@ const addUser = (username, email, password, type) => (
 const addOneArtist = (authId) => (
   client.query(`
   INSERT INTO artists (auth_id)
-  VALUES ('${authId}');
+  VALUES ('${authId}') RETURNING id;
 `)
 );
 
 const addOneFan = (authId) => (
   client.query(`
   INSERT INTO fans (auth_id)
-  VALUES ('${authId}');
+  VALUES ('${authId}') RETURNING id;
 `)
 );
 
