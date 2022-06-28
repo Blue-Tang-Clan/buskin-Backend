@@ -1,22 +1,37 @@
 const client = require('../index');
 
-const find = function (username, password) {
-  return client.query(`
+const findUser = (username) => (
+  client.query(`
     SELECT *
     FROM auth
     WHERE username = '${username}'
-    AND password = '${password}'
   `)
-    .then((data) => data.rows)
-    .catch((err) => console.error('Query Error', err));
-};
+);
 
-const add = function (username, email, password, type) {
-  return client.query(`
+const addUser = (username, email, password, type) => (
+  client.query(`
     INSERT INTO auth (username, email, password, type)
-    VALUES ('${username}', '${email}', '${password}', '${type}');
+    VALUES ('${username}', '${email}', '${password}', '${type}') RETURNING id;
   `)
-    .catch((err) => console.error('Insert Error', err));
-};
+);
 
-module.exports = { find, add };
+const addOneArtist = (authId) => (
+  client.query(`
+  INSERT INTO artists (auth_id)
+  VALUES ('${authId}');
+`)
+);
+
+const addOneFan = (authId) => (
+  client.query(`
+  INSERT INTO fans (auth_id)
+  VALUES ('${authId}');
+`)
+);
+
+module.exports = {
+  findUser,
+  addUser,
+  addOneArtist,
+  addOneFan,
+};

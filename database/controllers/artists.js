@@ -2,24 +2,13 @@ const { query } = require('express');
 const artist = require('../models/artist');
 
 module.exports = {
+  getArtistDetails: (req, res) => { artist.get(req, res) },
+  
+  updateArtistProfile: (req, res) => { artist.update(req, res) },
 
-  postArtistEvent: (req, res) => {
-    // Insert into events table event info
-    // Insert into artist_events join table artist id and event id
-
-  },
-
-  getArtistProfile: (req, res) => {
-
-  },
-
-  putArtistProfile: (req, res) => {
-
-  },
-
-  deleteArtistEvent: (req, res) => { artist.deleteArtistEvent(req, res) },
-  putArtistEvent: (req, res) => { artist.putArtistEvent(req, res) }
+  postArtistEvent: (req, res) => { artist.addEvent(req, res) },
+  
+  putArtistEvent: (req, res) => { artist.putArtistEvent(req, res) },
+  
+  deleteArtistEvent: (req, res) => { artist.deleteArtistEvent(req, res) }
 };
-
-// const deleteArtistProfile
-
