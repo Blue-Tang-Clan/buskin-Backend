@@ -1,11 +1,11 @@
 const client = require('../index');
 
 module.exports = {
-  get: function(req, res) {
+  get: (req, res) => {
     client.query(`
       SELECT json_build_object(
-       'username', (SELECT username FROM auth a WHERE a.id = f.auth_id),
-       'address', (SELECT
+        'username', (SELECT username FROM auth a WHERE a.id = f.auth_id),
+        'address', (SELECT
           json_build_object(
             'city', f.city,
             'state', f.state,
@@ -72,7 +72,8 @@ module.exports = {
       res.end(JSON.stringify(err));
     });
   },
-  saveEvent: function(req, res) {
+
+  saveEvent: (req, res) => {
     client.query(`INSERT INTO event_fan
                   (fan_id, event_id)
                   VALUES
@@ -84,7 +85,8 @@ module.exports = {
       res.end(JSON.stringify(err));
     });
   },
-  followArtist: function(req, res) {
+
+  followArtist: (req, res) => {
     client.query(`INSERT INTO art_fan
                   (fan_id, art_id)
                   VALUES
@@ -96,7 +98,8 @@ module.exports = {
       res.end(JSON.stringify(err));
     });
   },
-  put: function(req, res) {
+
+  put: (req, res) => {
     client.query(`UPDATE fans
                   SET street = ${req.body.street},
                       city = ${req.body.city},
@@ -109,7 +112,8 @@ module.exports = {
       res.end(JSON.stringify(err));
     });
   },
-  removeEvent: function(req, res) {
+
+  removeEvent: (req, res) => {
     client.query(`DELETE FROM event_fan
                   WHERE fan_id = ${req.params.fanId}
                   AND event_id = ${req.params.eventId} `)
@@ -120,7 +124,8 @@ module.exports = {
       res.end(JSON.stringify(err));
     });
   },
-  unfollowArtist: function(req, res) {
+
+  unfollowArtist: (req, res) => {
     client.query(`DELETE FROM art_fan
                   WHERE fan_id = ${req.params.fanId}
                   AND art_id = ${req.params.artistId} `)
