@@ -29,8 +29,8 @@ const search = {
         )
         )`)
       .then((data) => { res.status(200).json(data.rows[0]); })
-      .catch((err) => { console.log(err); });
+      .catch((err) => { res.status(500).send(err); });
   },
 };
-// res.status(500).send(err);
+
 module.exports = search;
