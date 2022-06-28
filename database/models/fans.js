@@ -27,7 +27,8 @@ module.exports = {
                 'event_latitude', e.latitude,
                 'event_date', e.date,
                 'event_start_time', e.start_time,
-                'event_end_time', e.end_time
+                'event_end_time', e.end_time,
+                'event_pic', e.pic
               )
             )
           )
