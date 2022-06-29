@@ -81,62 +81,6 @@ const artist = {
       });
   },
 
-<<<<<<< HEAD
-  update: async (req, res) => {
-    const { picture } = req.body;
-    let pictureUrl = '';
-
-    const query = `
-      UPDATE artists
-      SET display_name = '${req.body.displayName}',
-        instrument = '${req.body.instrument}',
-        genre = '${req.body.genre}',
-        bio = '${req.body.bio}',
-        pic = '${pictureUrl}',
-        venmo = '${req.body.venmo}',
-        paypal = '${req.body.paypal}',
-        cashapp = '${req.body.cashapp}'
-      WHERE id = ${req.params.artist_id}
-    `;
-      console.log('the query', query);
-
-
-
-    function queryCaller() {
-      console.log(pictureUrl, )
-      const query = `
-      UPDATE artists
-      SET display_name = '${req.body.displayName}',
-        instrument = '${req.body.instrument}',
-        genre = '${req.body.genre}',
-        bio = '${req.body.bio}',
-        pic = '${pictureUrl}',
-        venmo = '${req.body.venmo}',
-        paypal = '${req.body.paypal}',
-        cashapp = '${req.body.cashapp}'
-      WHERE id = ${req.params.artist_id}
-    `;
-      console.log('the query', query);
-      // client.query(query)
-      //   .then(() => res.sendStatus(201))
-      //   .catch((err) => {
-      //     console.log(err)
-      //     res.status(500).send(err)
-      //   });
-    }
-
-    uploadImage(req, res, (err, some) => {
-      if (err) {
-        console.log('Error uploading image');
-        res.end();
-      } else {
-        console.log('the request', req.file);
-        pictureUrl = req.file.location;
-        queryCaller();
-      }
-    });
-    console.log('pic url', pictureUrl);
-=======
   update: (req, res) => {
     uploadImage(req, res)
       .then((picUrl) => {
@@ -156,7 +100,6 @@ const artist = {
           .catch((err) => res.status(500).send(err));
       })
       .catch((err) => res.status(500).send(err));
->>>>>>> development
   },
 
   deleteArtistEvent: (req, res) => {

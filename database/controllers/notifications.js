@@ -1,10 +1,10 @@
-const models = require('../models');
+const notifications = require('../models/notifications');
 
 module.exports = {
   sendEventNotification: (req, res) => {
-    models.notifications.sendEventNotification(req, res);
+    notifications.sendEventNotification(req, res);
   },
   sendEventAlert: (req, res) => {
-    models.notifications.sendEventAlert(req, res);
+    notifications.sendEventAlert(req, res);
   },
 };

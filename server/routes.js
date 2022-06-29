@@ -3,9 +3,7 @@ const auth = require('../database/controllers/auth');
 const artist = require('../database/controllers/artists');
 const fans = require('../database/controllers/fans');
 const events = require('../database/controllers/events');
-<<<<<<< HEAD
 const notifications = require('../database/controllers/notifications');
-=======
 const search = require('../database/controllers/search');
 const homePage = require('../database/controllers/homepage');
 
@@ -20,7 +18,6 @@ router.get('/homepage/defaultGenre', homePage.geteDefaultGenre);
 
 // Routes for Search
 router.get('/search', search.getSearchInfo);
->>>>>>> development
 
 // Routes for Artists
 router.get('/artist/details/:artist_id', artist.getArtistDetails);
