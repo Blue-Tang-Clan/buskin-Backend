@@ -83,7 +83,7 @@ const homePage = {
     client.query(`
       SELECT id, display_name AS artist_name, instrument, genre, bio, pic, venmo, paypal, cashapp, fan_num 
       FROM artists a
-      WHERE UPPER(a.genre) = UPPER('%${genre}%')
+      WHERE UPPER(a.genre) LIKE UPPER('%${genre}%')
     `)
       .then((result) => res.status(200).json(result.rows))
       .catch((err) => res.status(500).json(err));
