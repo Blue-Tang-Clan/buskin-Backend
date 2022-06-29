@@ -7,4 +7,7 @@ module.exports = {
   get: (req, res) => {
     models.events.get(req, res);
   },
+  checkEventConflict: (req, res) => {
+    models.events.checkEventConflict(req, res);
+  },
 };
