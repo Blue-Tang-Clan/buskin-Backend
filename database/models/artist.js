@@ -18,7 +18,6 @@ const artist = {
       where a.id = ${req.params.artist_id};
     `)
       .then((data) => {
-        console.log('error here', data);
         res.status = 200;
         res.send(data);
       })
