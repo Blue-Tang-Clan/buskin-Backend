@@ -73,7 +73,7 @@ const homePage = {
     client.query(`
       SELECT DISTINCT UPPER(genre) AS genres
       FROM artists
-      WHERE genre IS NOT null
+      WHERE genre IS NOT null AND genre != 'undefined'
     `)
       .then((result) => res.status(200).json(result.rows))
       .catch((err) => res.status(500).json(err));
