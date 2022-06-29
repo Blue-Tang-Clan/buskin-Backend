@@ -4,6 +4,8 @@ const {
   addUser,
   addOneArtist,
   addOneFan,
+  findArtistId,
+  findFanId,
 } = require('../models/auth');
 require('dotenv').config();
 
@@ -54,8 +56,15 @@ module.exports = {
               if (!pass) {
                 res.status(400).send('Wrong Username or Password');
               } else {
-                res.status(201).send({ id: user.id, username: user.username, userType: user.type });
+                if (user.type === 'artist') {
+                  return findArtistId(user.id);
+                }
+                return findFanId(user.id);
               }
+            })
+            .then((response) => {
+              res.status(201).send(
+                { id: response.rows[0].id, username: user.username, userType: user.type });
             });
         }
       })

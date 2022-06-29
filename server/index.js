@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 app.use('/', router);
 
+<<<<<<< HEAD
 app.post('/send-email', async (req, res) => {
   // let testAccount = await nodeMailer.createTestAccount();
   const transporter = nodeMailer.createTransport({
@@ -43,6 +44,8 @@ app.post('/send-email', async (req, res) => {
   });
 });
 
+=======
+>>>>>>> development
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`successful connected to ${port}`);
