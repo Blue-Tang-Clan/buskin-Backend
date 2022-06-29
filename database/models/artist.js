@@ -2,7 +2,6 @@ const client = require('../index');
 
 const artist = {
   get: (req, res) => {
-    console.log('we get this far', req);
     client.query(`
       select json_build_object(
         'id', a.id,
