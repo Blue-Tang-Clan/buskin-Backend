@@ -3,6 +3,7 @@ const auth = require('../database/controllers/auth');
 const artist = require('../database/controllers/artists');
 const fans = require('../database/controllers/fans');
 const events = require('../database/controllers/events');
+const notifications = require('../database/controllers/notifications');
 
 // Routes for Artists
 router.get('/artist/details/:artist_id', artist.getArtistDetails);
@@ -35,5 +36,11 @@ router.get('/event/:eventId', events.get);
 // register and login user
 router.post('/register', auth.registerUser);
 router.post('/login', auth.loginUser);
+
+// new event notification :for fans
+router.post('/eventnotification', notifications.sendEventNotification);
+
+// event collision alert
+// router.get()
 
 module.exports = router;
