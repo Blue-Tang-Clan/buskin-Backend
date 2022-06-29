@@ -15,7 +15,7 @@ const artist = {
         'venmo', a.venmo,
         'cashapp', a.cashapp,
         'paypal', a.paypal,
-
+        'fan_num', a.fan_num,
         'events', (select
           array_to_json(
             array_agg(

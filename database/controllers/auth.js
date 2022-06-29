@@ -57,10 +57,8 @@ module.exports = {
                 res.status(400).send('Wrong Username or Password');
               } else {
                 if (user.type === 'artist') {
-                  // add new artist
                   return findArtistId(user.id);
                 }
-                // add new fan
                 return findFanId(user.id);
               }
             })
