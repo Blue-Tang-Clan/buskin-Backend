@@ -3,6 +3,13 @@ const auth = require('../database/controllers/auth');
 const artist = require('../database/controllers/artists');
 const fans = require('../database/controllers/fans');
 const events = require('../database/controllers/events');
+const search = require('../database/controllers/search');
+
+// Routes for HomePage
+// router.get('/', search.getSearchInfo);
+
+// Routes for Search
+router.get('/search', search.getSearchInfo);
 
 // Routes for Artists
 router.get('/artist/details/:artist_id', artist.getArtistDetails);
@@ -28,7 +35,6 @@ router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
 
 router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
 
-// register and login user
 router.get('/events/:date', events.getAll);
 router.get('/event/:eventId', events.get);
 
