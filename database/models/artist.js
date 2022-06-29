@@ -38,11 +38,7 @@ const artist = {
         ),
         'followers', (select
           array_to_json(
-            array_agg(
-              json_build_object(
-                'email', (SELECT auth.email FROM auth WHERE auth.id = f.auth_id)
-              )
-            )
+            array_agg((SELECT auth.email FROM auth WHERE auth.id = f.auth_id))
           )
           FROM fans f, art_fan af
           WHERE af.fan_id = f.id
@@ -54,7 +50,6 @@ const artist = {
       where a.id = ${req.params.artist_id};
     `)
       .then((data) => {
-        console.log('error here', data);
         res.status = 200;
         res.send(data);
       })
