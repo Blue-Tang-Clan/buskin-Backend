@@ -31,7 +31,7 @@ const addOneFan = (authId) => (
 
 const findArtistId = (authId) => (
   client.query(`
-  SELECT id FROM artists WHERE auth_id = ${authId};
+  SELECT id, pic FROM artists WHERE auth_id = ${authId};
 `)
 );
 
