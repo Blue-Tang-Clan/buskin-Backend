@@ -4,9 +4,16 @@ const artist = require('../database/controllers/artists');
 const fans = require('../database/controllers/fans');
 const events = require('../database/controllers/events');
 const search = require('../database/controllers/search');
+const homePage = require('../database/controllers/homepage');
 
 // Routes for HomePage
-// router.get('/', search.getSearchInfo);
+router.get('/homepage/:latitude/:longitude', homePage.getHomePageInfo);
+
+router.get('/homepage/genre', homePage.getHomePageGenre);
+
+router.get('/homepage/:genre', homePage.searchHomePageGenre);
+
+router.get('/homepage/defaultGenre', homePage.geteDefaultGenre);
 
 // Routes for Search
 router.get('/search', search.getSearchInfo);
@@ -35,9 +42,9 @@ router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
 
 router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
 
-// register and login user
 router.get('/events/:date', events.getAll);
 router.get('/event/:eventId', events.get);
+router.get('/check/events', events.checkEventConflict);
 
 // register and login user
 router.post('/register', auth.registerUser);
