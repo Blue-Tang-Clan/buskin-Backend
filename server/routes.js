@@ -35,7 +35,6 @@ router.delete('/fans/event/:fanId/:eventId', fans.removeEvent);
 
 router.delete('/fans/follow/:fanId/:artistId', fans.unfollowArtist);
 
-// register and login user
 router.get('/events/:date', events.getAll);
 router.get('/event/:eventId', events.get);
 
