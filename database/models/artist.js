@@ -1,6 +1,6 @@
 const client = require('../index');
-const upload = require('../../awsconfig.js');
-const uploadImage = upload.single('image');
+const uploadImage = require('../../awsconfig');
+// const uploadImage = upload.single('image');
 
 const artist = {
   get: (req, res) => {
@@ -45,37 +45,25 @@ const artist = {
       });
   },
 
-  update: async (req, res) => {
-    const { picture } = req.body;
-    let pictureUrl = '';
-    function queryCaller() {
-      const query = `
-      UPDATE artists
-      SET display_name = '${req.body.displayName}',
-        instrument = '${req.body.instrument}',
-        genre = '${req.body.genre}',
-        bio = '${req.body.bio}',
-        pic = '${pictureUrl}',
-        venmo = '${req.body.venmo}',
-        paypal = '${req.body.paypal}',
-        cashapp = '${req.body.cashapp}'
-      WHERE id = ${req.params.artist_id}
-    `;
-      client.query(query)
-        .then(() => res.sendStatus(201))
-        .catch((err) => {
-          res.status(500).send(err);
-        });
-    }
-
-    uploadImage(req, res, (err, some) => {
-      if (err) {
-        res.end();
-      } else {
-        pictureUrl = req.file.location;
-        queryCaller();
-      }
-    });
+  update: (req, res) => {
+    uploadImage(req, res)
+      .then((picUrl) => {
+        client.query(`
+        UPDATE artists
+        SET display_name = '${req.body.displayName}',
+          instrument = '${req.body.instrument}',
+          genre = '${req.body.genre}',
+          bio = '${req.body.bio}',
+          pic = '${picUrl}',
+          venmo = '${req.body.venmo}',
+          paypal = '${req.body.paypal}',
+          cashapp = '${req.body.cashapp}'
+        WHERE id = ${req.params.artist_id}
+      `)
+          .then(() => res.sendStatus(201))
+          .catch((err) => res.status(500).send(err));
+      })
+      .catch((err) => res.status(500).send(err));
   },
 
   deleteArtistEvent: (req, res) => {
