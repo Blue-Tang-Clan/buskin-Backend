@@ -1,5 +1,5 @@
 const nodeMailer = require('nodemailer');
-const password = require('../../emailconfig');
+const password = require('../../config');
 
 const notifications = {
   sendEventNotification: (req, res) => {

@@ -4,9 +4,9 @@ const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 
 aws.config.update({
-  secretAccessKey: '2YovbvDUXPh/QsajS7z0r6ulxDUz7KLlVYKFRchM',
-  accessKeyId: 'AKIAVN3TKKT7IWKYWDQ5',
-  region: 'us-east-1',
+  secretAccessKey: process.env.KEY,
+  accessKeyId: process.env.ID,
+  region: process.env.REGION,
 });
 
 const s3 = new aws.S3();

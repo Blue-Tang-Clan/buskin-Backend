@@ -71,7 +71,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
-emailconfig.js
+config.js
 awsconfig.js
 # parcel-bundler cache (https://parceljs.org/)
 .cache
