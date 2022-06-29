@@ -21,11 +21,12 @@ const search = {
           'name', e.name,
           'city', e.city,
           'state', e.state,
-          'art_id', e.art_id,
-          'pic', e.pic,
-          'description', e.description )))
+          'pic', e.pic )))
           FROM event e
           WHERE e.name LIKE '%${query}%'
+          OR e.city LIKE '%${query}%'
+          OR e.street LIKE '%${query}%'
+          OR e.state LIKE '%${query}%'
         )
         )`)
       .then((data) => { res.status(200).json(data.rows[0]); })

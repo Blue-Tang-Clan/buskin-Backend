@@ -4,9 +4,12 @@ const artist = require('../database/controllers/artists');
 const fans = require('../database/controllers/fans');
 const events = require('../database/controllers/events');
 const search = require('../database/controllers/search');
+const homePage = require('../database/controllers/homepage');
 
 // Routes for HomePage
-// router.get('/', search.getSearchInfo);
+router.get('/homepage/:latitude/:longitude', homePage.getHomePageInfo);
+
+router.get('/homepage/:genre', homePage.getHomePageGenre);
 
 // Routes for Search
 router.get('/search', search.getSearchInfo);
