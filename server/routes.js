@@ -9,7 +9,11 @@ const homePage = require('../database/controllers/homepage');
 // Routes for HomePage
 router.get('/homepage/:latitude/:longitude', homePage.getHomePageInfo);
 
-router.get('/homepage/:genre', homePage.getHomePageGenre);
+router.get('/homepage/genre', homePage.getHomePageGenre);
+
+router.get('/homepage/:genre', homePage.searchHomePageGenre);
+
+router.get('/homepage/defaultGenre', homePage.geteDefaultGenre);
 
 // Routes for Search
 router.get('/search', search.getSearchInfo);
