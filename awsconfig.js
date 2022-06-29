@@ -25,4 +25,14 @@ const upload = multer({
   }),
 });
 
+// const uploadImage = new Promise((resolve, reject) => {
+//   upload.single('image')(req, res, (err, some) => {
+//     if (err) {
+//       reject(err);
+//     } else {
+//       resolve('');
+//     }
+//   })
+// })
+
 module.exports = upload;
