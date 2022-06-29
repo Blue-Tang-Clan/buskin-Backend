@@ -70,11 +70,30 @@ const homePage = {
       .catch((err) => res.status(500).json(err));
   },
   getHomePageGenre: (req, res) => {
+    client.query(`
+      SELECT DISTINCT UPPER(genre) AS genres
+      FROM artists
+      WHERE genre IS NOT null
+    `)
+      .then((result) => res.status(200).json(result.rows))
+      .catch((err) => res.status(500).json(err));
+  },
+  searchHomePageGenre: (req, res) => {
     const { genre } = req.params;
     client.query(`
       SELECT id, display_name AS artist_name, instrument, genre, bio, pic, venmo, paypal, cashapp, fan_num 
       FROM artists a
-      WHERE a.genre = '${genre}'
+      WHERE UPPER(a.genre) = UPPER('%${genre}%')
+    `)
+      .then((result) => res.status(200).json(result.rows))
+      .catch((err) => res.status(500).json(err));
+  },
+  geteDefaultGenre: (req, res) => {
+    const genre = 'pop';
+    client.query(`
+      SELECT id, display_name AS artist_name, instrument, genre, bio, pic, venmo, paypal, cashapp, fan_num 
+      FROM artists a
+      WHERE UPPER(a.genre) = UPPER('%${genre}%')
     `)
       .then((result) => res.status(200).json(result.rows))
       .catch((err) => res.status(500).json(err));
