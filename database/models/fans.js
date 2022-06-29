@@ -75,11 +75,24 @@ module.exports = {
   },
 
   saveEvent: (req, res) => {
-    client.query(`INSERT INTO event_fan
-                  (fan_id, event_id)
-                  VALUES
-                  (${req.body.id}, ${req.body.event_id})`)
-      .then(() => res.sendStatus(201))
+    client.query(`SELECT * FROM event_fan WHERE fan_id = ${req.body.id} AND event_id = ${req.body.event_id}`)
+      .then((data) => {
+        console.log(data.rows);
+        if (!data.rows) {
+          client.query(`INSERT INTO event_fan
+                        (fan_id, event_id)
+                        VALUES
+                        (${req.body.id}, ${req.body.event_id})`)
+            .then(() => res.sendStatus(201))
+            .catch((err) => {
+              console.log('Save Event Fan error: ', err);
+              res.status(500);
+              res.end(JSON.stringify(err));
+            });
+        } else {
+          res.sendStatus(201);
+        }
+      })
       .catch((err) => {
         console.log('Save Event Fan error: ', err);
         res.status(500);
