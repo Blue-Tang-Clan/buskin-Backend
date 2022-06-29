@@ -29,9 +29,23 @@ const addOneFan = (authId) => (
 `)
 );
 
+const findArtistId = (authId) => (
+  client.query(`
+  SELECT id FROM artists WHERE auth_id = ${authId};
+`)
+);
+
+const findFanId = (authId) => (
+  client.query(`
+  SELECT id FROM fans WHERE auth_id = ${authId};
+`)
+);
+
 module.exports = {
   findUser,
   addUser,
   addOneArtist,
   addOneFan,
+  findArtistId,
+  findFanId,
 };
