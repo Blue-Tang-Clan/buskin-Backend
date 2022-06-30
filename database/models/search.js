@@ -24,7 +24,7 @@ const search = {
           'pic', e.pic )))
           FROM event e
           WHERE lower(e.name) LIKE '%${query.toLowerCase()}%'
-          OR lower(e.city) LIKE '%${query}%'
+          OR lower(e.city) LIKE '%${query.toLowerCase()}%'
           OR lower(e.street) LIKE '%${query.toLowerCase()}%'
           OR lower(e.state) LIKE '%${query.toLowerCase()}%'
         )
