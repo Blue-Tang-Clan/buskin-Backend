@@ -7,7 +7,7 @@ const homePage = {
     const range = 0.1;
     client.query(`
       SELECT json_build_object(
-        'events', (
+        'coming_events', (
           SELECT array_to_json(array_agg(json_build_object(
             'id', e.id,
             'event_name', e.name,
@@ -24,9 +24,29 @@ const homePage = {
           FROM (
               SELECT * FROM event 
               WHERE date::date >= CURRENT_DATE
-              AND longitude <= ${longitude} + ${range} AND longitude >= ${longitude} - ${range}
-              AND latitude <= ${latitude} + ${range} AND latitude >= ${latitude} - ${range}
               ORDER BY date, start_time DESC
+              LIMIT 5
+          ) AS e
+        ),
+        'local_events', (
+          SELECT array_to_json(array_agg(json_build_object(
+            'id', e.id,
+            'event_name', e.name,
+            'street', e.street,
+            'city', e.city,
+            'state', e.state,
+            'longitude', e.longitude,
+            'latitude', e.latitude,
+            'date', e.date,
+            'start_time', e.start_time,
+            'end_time', e.end_time,
+            'description', e.description,
+            'pic', e.pic )))
+          FROM (
+              SELECT * FROM event 
+              WHERE longitude <= ${longitude} + ${range} AND longitude >= ${longitude} - ${range}
+              AND latitude <= ${latitude} + ${range} AND latitude >= ${latitude} - ${range}
+              ORDER BY id DESC
               LIMIT 5
           ) AS e
         ),
