@@ -1,5 +1,4 @@
 const nodeMailer = require('nodemailer');
-const password = require('../../config');
 
 const notifications = {
   sendEventNotification: (req, res) => {
@@ -10,7 +9,7 @@ const notifications = {
       secure: true,
       auth: {
         user: 'buskinfan@gmail.com',
-        pass: password,
+        pass: process.env.PASSWORD,
       },
     });
     const mailOptions = {

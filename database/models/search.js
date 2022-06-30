@@ -6,14 +6,14 @@ const search = {
     client.query(`
       SELECT json_build_object(
         'artists', (
-          SELECT array_to_json(array_agg(json_build_object( 
-          'id', a.id, 
-          'name', a.display_name, 
+          SELECT array_to_json(array_agg(json_build_object(
+          'id', a.id,
+          'name', a.display_name,
           'pic', a.pic )))
           FROM artists a
-          WHERE a.display_name LIKE '%${query}%'
-          OR a.instrument LIKE '%${query}%'
-          OR a.genre LIKE '%${query}%'
+          WHERE lower(a.display_name) LIKE '%${query.toLowerCase()}%'
+          OR lower(a.instrument) LIKE '%${query.toLowerCase()}%'
+          OR lower(a.genre) LIKE '%${query.toLowerCase()}%'
         ),
         'event', (
           SELECT array_to_json(array_agg(json_build_object(
@@ -23,10 +23,10 @@ const search = {
           'state', e.state,
           'pic', e.pic )))
           FROM event e
-          WHERE e.name LIKE '%${query}%'
-          OR e.city LIKE '%${query}%'
-          OR e.street LIKE '%${query}%'
-          OR e.state LIKE '%${query}%'
+          WHERE lower(e.name) LIKE '%${query.toLowerCase()}%'
+          OR lower(e.city) LIKE '%${query.toLowerCase()}%'
+          OR lower(e.street) LIKE '%${query.toLowerCase()}%'
+          OR lower(e.state) LIKE '%${query.toLowerCase()}%'
         )
         )`)
       .then((data) => { res.status(200).json(data.rows[0]); })
