@@ -97,9 +97,15 @@ const artist = {
       .catch((err) => res.status(500).send(err));
   },
 
+  // delete from event_fan for event_id=?
+  // delete from event for art_id=req.params.artistId
   deleteArtistEvent: (req, res) => {
-    client.query(`DELETE FROM artist_fan
-                  WHERE artist_id = ${req.params.artistId} AND fans_id = ${req.body.fanId};`)
+    client.query(`DELETE FROM event_fan
+                  WHERE event_id = ${req.params.event_id};`)
+      .then(() => {
+        client.query(`DELETE FROM event
+      WHERE art_id = ${req.params.artist_id};`);
+      })
       .then(() => res.sendStatus(201))
       .catch((err) => res.status(500).json(err));
   },

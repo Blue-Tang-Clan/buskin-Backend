@@ -28,7 +28,7 @@ router.post('/artist/event/:artist_id', artist.postArtistEvent);
 
 router.put('/artists/event/:artist_id', artist.putArtistEvent);
 
-router.delete('/artists/event/:artist_id', artist.deleteArtistEvent);
+router.delete('/artists/event/:artist_id/:event_id', artist.deleteArtistEvent);
 
 // Routes for Fans
 router.get('/fan/dashboard/:fanId', fans.get);
