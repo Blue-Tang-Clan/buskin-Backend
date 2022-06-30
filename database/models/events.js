@@ -69,11 +69,13 @@ module.exports = {
     const lonRange = 0.0003;
     const latRange = 0.00025;
 
-    console.log('the queries')
-
     client.query(`
-      SELECT (art_id, email)
+      SELECT event.id, auth.email, artists.display_name
       FROM event
+      INNER JOIN artists
+      ON artists.id = event.art_id
+      INNER JOIN auth
+      on auth.id = artists.auth_id
       WHERE longitude <= ${longitude} + ${lonRange} AND longitude >= ${longitude} - ${lonRange}
         AND latitude <= ${latitude} + ${latRange} AND latitude >= ${latitude} - ${latRange}
         AND date = '${date}'
