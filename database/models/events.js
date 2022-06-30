@@ -72,7 +72,7 @@ module.exports = {
     console.log('the queries')
 
     client.query(`
-      SELECT art_id
+      SELECT (art_id, email)
       FROM event
       WHERE longitude <= ${longitude} + ${lonRange} AND longitude >= ${longitude} - ${lonRange}
         AND latitude <= ${latitude} + ${latRange} AND latitude >= ${latitude} - ${latRange}
