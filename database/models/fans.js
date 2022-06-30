@@ -78,7 +78,7 @@ module.exports = {
     client.query(`SELECT * FROM event_fan WHERE fan_id = ${req.body.id} AND event_id = ${req.body.event_id}`)
       .then((data) => {
         console.log(data.rows);
-        if (!data.rows) {
+        if (!data.rows.length) {
           client.query(`INSERT INTO event_fan
                         (fan_id, event_id)
                         VALUES
