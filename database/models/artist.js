@@ -51,6 +51,7 @@ const artist = {
     `)
       .then((data) => {
         res.status = 200;
+        console.log(data.rows[0].json_build_object);
         res.send(data);
       })
       .catch((err) => {
@@ -100,11 +101,13 @@ const artist = {
   // delete from event_fan for event_id=?
   // delete from event for art_id=req.params.artistId
   deleteArtistEvent: (req, res) => {
+    console.log(req.params.artist_id);
+    console.log(req.params.event_id);
     client.query(`DELETE FROM event_fan
                   WHERE event_id = ${req.params.event_id};`)
       .then(() => {
         client.query(`DELETE FROM event
-      WHERE art_id = ${req.params.artist_id};`);
+      WHERE art_id = ${req.params.artist_id} AND id = ${req.params.event_id};`);
       })
       .then(() => res.sendStatus(201))
       .catch((err) => res.status(500).json(err));
