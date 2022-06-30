@@ -4,7 +4,7 @@ const homePage = {
   getHomePageInfo: (req, res) => {
     const randomArtistId = Math.floor(Math.random() * 50);
     const { longitude, latitude } = req.params;
-    const range = 20;
+    const range = 0.1;
     client.query(`
       SELECT json_build_object(
         'events', (
