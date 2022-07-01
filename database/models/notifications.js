@@ -1,8 +1,10 @@
 const nodeMailer = require('nodemailer');
+require('dotenv').config();
 
 const notifications = {
   sendEventNotification: (req, res) => {
     const { receivers, subject, text } = req.body;
+    console.log(receivers, subject, text, process.env.PASSWORD)
     const transporter = nodeMailer.createTransport({
       service: 'gmail',
       port: 465,
@@ -21,7 +23,8 @@ const notifications = {
 
     transporter.sendMail(mailOptions, (err) => {
       if (err) {
-        res.sendStatus(500).json(err);
+        console.log(err);
+        res.sendStatus(500);
       }
       res.sendStatus(201);
     });
