@@ -101,8 +101,8 @@ const artist = {
   // delete from event_fan for event_id=?
   // delete from event for art_id=req.params.artistId
   deleteArtistEvent: (req, res) => {
-    console.log(req.params.artist_id);
-    console.log(req.params.event_id);
+    // console.log(req.params.artist_id);
+    // console.log(req.params.event_id);
     client.query(`DELETE FROM event_fan
                   WHERE event_id = ${req.params.event_id};`)
       .then(() => {
