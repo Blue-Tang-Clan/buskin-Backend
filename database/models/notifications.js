@@ -24,9 +24,9 @@ const notifications = {
     transporter.sendMail(mailOptions, (err) => {
       if (err) {
         console.log(err);
-        res.sendStatus(500);
+        res.status(500).send(err);
       }
-      res.sendStatus(201);
+      res.status(201).send();
     });
   },
 };
