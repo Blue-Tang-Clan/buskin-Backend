@@ -37,7 +37,9 @@ module.exports = {
       });
   },
   checkEventConflict: (req, res) => {
-    let { latitude, longitude, date, start_time } = req.query;
+    let {
+      latitude, longitude, date, start_time,
+    } = req.query;
     latitude = decodeURI(latitude);
     longitude = decodeURI(longitude);
     date = decodeURI(date);

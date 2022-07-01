@@ -1,5 +1,5 @@
 const nodeMailer = require('nodemailer');
-
+// <---- EMAIL NOTIFICATION QUERIES ----->
 const notifications = {
   sendEventNotification: (req, res) => {
     const { receivers, subject, text } = req.body;

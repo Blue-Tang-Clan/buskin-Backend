@@ -33,7 +33,9 @@ module.exports = {
       })
       .then((data) => {
         const userId = data.rows[0].id;
-        res.status(201).send({ userId, username, userType, pic: '' });
+        res.status(201).send({
+          userId, username, userType, pic: '',
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -66,10 +68,16 @@ module.exports = {
               const result = response.rows[0];
               if (result.pic) {
                 res.status(201).send(
-                  { id: result.id, username: user.username, userType: user.type, pic: result.pic });
+                  {
+                    id: result.id, username: user.username, userType: user.type, pic: result.pic,
+                  },
+                );
               } else {
                 res.status(201).send(
-                  { id: result.id, username: user.username, userType: user.type, pic: '' });
+                  {
+                    id: result.id, username: user.username, userType: user.type, pic: '',
+                  },
+                );
               }
             });
         }

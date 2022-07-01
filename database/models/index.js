@@ -1,2 +1,2 @@
-exports.fans = require('./fans.js');
-exports.events = require('./events.js');
+exports.fans = require('./fans');
+exports.events = require('./events');

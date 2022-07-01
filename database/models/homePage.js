@@ -1,5 +1,5 @@
 const client = require('../index');
-
+// homepage queries to display randomized events and artist information
 const homePage = {
   getHomePageInfo: (req, res) => {
     const randomArtistId = Math.floor(Math.random() * 50);
@@ -89,6 +89,7 @@ const homePage = {
       .then((result) => res.status(200).json(result.rows[0].json_build_object))
       .catch((err) => res.status(500).json(err));
   },
+  // <---- homepage genre queries ----->
   getHomePageGenre: (req, res) => {
     client.query(`
       SELECT DISTINCT UPPER(genre) AS genres
