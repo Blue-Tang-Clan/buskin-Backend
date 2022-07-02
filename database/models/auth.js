@@ -1,5 +1,5 @@
 const client = require('../index');
-
+// <---- AUTHENTICATION QUERIES ----->
 const findUser = (username) => (
   client.query(`
     SELECT *

@@ -1,6 +1,5 @@
 const client = require('../index');
 const uploadImage = require('../../awsconfig');
-// const uploadImage = upload.single('image');
 
 const artist = {
   get: (req, res) => {
@@ -51,7 +50,6 @@ const artist = {
     `)
       .then((data) => {
         res.status = 200;
-        console.log(data.rows[0].json_build_object);
         res.send(data);
       })
       .catch((err) => {
@@ -98,11 +96,7 @@ const artist = {
       .catch((err) => res.status(500).send(err));
   },
 
-  // delete from event_fan for event_id=?
-  // delete from event for art_id=req.params.artistId
   deleteArtistEvent: (req, res) => {
-    // console.log(req.params.artist_id);
-    // console.log(req.params.event_id);
     client.query(`DELETE FROM event_fan
                   WHERE event_id = ${req.params.event_id};`)
       .then(() => {

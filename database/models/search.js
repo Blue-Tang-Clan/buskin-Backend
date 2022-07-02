@@ -1,5 +1,5 @@
 const client = require('../index');
-
+// search bar queries
 const search = {
   get: (req, res) => {
     let { query } = req.query;
